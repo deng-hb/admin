@@ -7,7 +7,7 @@
 ```
 mvn tomcat7:run
 ```
-2、访问 [http://localhost:9090/]http://localhost:9090/
+2、访问 [http://localhost:9090/](http://localhost:9090/)
 
 
 个人闲的时候写的。还有很多待完善。😄
