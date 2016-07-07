@@ -56,7 +56,7 @@
 		<dependency>
 			<groupId>com.denghb</groupId>
 			<artifactId>dbhelper</artifactId>
-			<version>1.4</version>
+			<version>1.5</version>
 		</dependency>
 
 		<dependency>
@@ -141,6 +141,7 @@
 					<port>9090</port>
 					<!-- application path always starts with / -->
 					<path>/</path>
+					<uriEncoding>UTF-8</uriEncoding>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -17,11 +17,14 @@ import com.denghb.admin.base.DataTablesResult;
 import com.denghb.admin.base.JsonResponse;
 import com.denghb.admin.base.ParameterException;
 import com.denghb.admin.criteria.SysUserCriteria;
+import com.denghb.admin.domain.SysRole;
 import com.denghb.admin.domain.SysUser;
 import com.denghb.admin.service.SysUserService;
+import com.denghb.admin.utils.DataUtils;
 import com.denghb.admin.utils.DateUtils;
 import com.denghb.admin.utils.ParameterUtils;
 import com.denghb.admin.utils.WebUtils;
+import com.denghb.dbhelper.domain.PagingResult;
 
 @Controller
 @RequestMapping("/sys/user")
@@ -44,8 +47,8 @@ public class SysUserController {
 
 		SysUserCriteria criteria = new SysUserCriteria();
 		ParameterUtils.initDataTablesParams(request, criteria);
-		DataTablesResult<SysUser> result = sysUserService.list(CurrentUser.sysUser(), criteria);
-		return JsonResponse.buildObject(result);
+		PagingResult<SysUser> result = sysUserService.list(CurrentUser.sysUser(), criteria);
+		return JsonResponse.buildObject(DataUtils.pagingResult2DataTablesResult(result));
 	}
 
 	@RequestMapping("/update")

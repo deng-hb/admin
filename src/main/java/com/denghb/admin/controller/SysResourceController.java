@@ -18,6 +18,7 @@ import com.denghb.admin.base.JsonResponse;
 import com.denghb.admin.criteria.SysResourceCriteria;
 import com.denghb.admin.domain.SysResource;
 import com.denghb.admin.service.SysResourceService;
+import com.denghb.admin.utils.DataUtils;
 import com.denghb.admin.utils.ParameterUtils;
 import com.denghb.admin.utils.WebUtils;
 import com.denghb.dbhelper.domain.PagingResult;
@@ -47,10 +48,8 @@ public class SysResourceController {
 		ParameterUtils.initDataTablesParams(request, criteria);
 
 		PagingResult<SysResource> result = sysResourceService.list(WebUtils.getCurrentUser(request), criteria);
-		DataTablesResult<SysResource> object = new DataTablesResult<SysResource>();
-		object.setData(result.getList());
-		object.setRecordsTotal(result.getPaging().getTotal());
-		return JsonResponse.buildObject(object);
+		
+		return JsonResponse.buildObject(DataUtils.pagingResult2DataTablesResult(result));
 	}
 	
 	@RequestMapping("/list-all")

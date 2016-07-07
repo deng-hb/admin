@@ -15,8 +15,10 @@ import com.denghb.admin.criteria.AccountCriteria;
 import com.denghb.admin.domain.Account;
 import com.denghb.admin.service.AccountAccessService;
 import com.denghb.admin.service.AccountService;
+import com.denghb.admin.utils.DataUtils;
 import com.denghb.admin.utils.ParameterUtils;
 import com.denghb.admin.utils.WebUtils;
+import com.denghb.dbhelper.domain.PagingResult;
 
 @Controller
 @RequestMapping("/account")
@@ -43,8 +45,8 @@ public class AccountController {
 		AccountCriteria criteria = new AccountCriteria();
 		ParameterUtils.initDataTablesParams(request, criteria);
 
-		DataTablesResult<Account> result = accountService.list(WebUtils.getCurrentUser(request), criteria);
-		return JsonResponse.buildObject(result);
+		PagingResult<Account> result = accountService.list(WebUtils.getCurrentUser(request), criteria);
+		return JsonResponse.buildObject(DataUtils.pagingResult2DataTablesResult(result));
 	}
 
 	@RequestMapping("/close")

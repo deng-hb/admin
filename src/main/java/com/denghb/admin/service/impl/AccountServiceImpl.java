@@ -25,8 +25,8 @@ public class AccountServiceImpl implements AccountService {
 		// 查询
 		StringBuffer sql = new StringBuffer();
 		sql.append(DbHelperUtils.getSelectSql(Account.class));
-		sql.append(" a inner join (select account_id from account_password where password = ? and deleted = 0) a");
-		sql.append(" on a.id = apt.account_id where a.username = ? and a.deleted = 0");
+		sql.append(" a inner join (select account_id from account_password where password = ? and deleted = 0) ap");
+		sql.append(" on a.id = ap.account_id where a.username = ? and a.deleted = 0");
 
 		Account account = db.queryForObject(sql.toString(), Account.class, password, username);
 		if (null == account) {

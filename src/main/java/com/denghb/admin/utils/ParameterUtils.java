@@ -38,14 +38,17 @@ public class ParameterUtils {
 
 			String column = request.getParameter("column");
 			String sort = request.getParameter("sort");
-// FIXME
-			paging.setPage(Long.parseLong(start));
-//			paging.setSearch(search);
-//			paging.setLength(Long.parseLong(length));
-//			paging.setStart(Long.parseLong(start));
-//			paging.setDraw(Long.parseLong(draw));
-//			paging.setSortField(paging.initSortField(Integer.parseInt(column)));
-//			paging.setSort(sort);
+			// FIXME
+			long startIndex = Long.parseLong(start);
+			long len = Long.parseLong(length);
+			if (startIndex >= len) {// 多于1页
+				if (startIndex % len == 0) {
+					paging.setPage(startIndex / len + 1);
+				} else {
+					paging.setPage(startIndex / len);
+				}
+			}
+			paging.setRows(len);
 
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -104,7 +107,8 @@ public class ParameterUtils {
 	}
 
 	// 获取日期
-	public static Date getNotNullDate(HttpServletRequest request, String name, String pattern, String alias) throws ParameterException {
+	public static Date getNotNullDate(HttpServletRequest request, String name, String pattern, String alias)
+			throws ParameterException {
 		String p = request.getParameter(name);
 		if (StringUtils.isNotBlank(p)) {
 			Date date = DateUtils.getDate(p, pattern);

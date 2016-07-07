@@ -16,8 +16,10 @@ import com.denghb.admin.base.JsonResponse;
 import com.denghb.admin.criteria.SysRoleCriteria;
 import com.denghb.admin.domain.SysRole;
 import com.denghb.admin.service.SysRoleService;
+import com.denghb.admin.utils.DataUtils;
 import com.denghb.admin.utils.ParameterUtils;
 import com.denghb.admin.utils.WebUtils;
+import com.denghb.dbhelper.domain.PagingResult;
 
 @Controller
 @RequestMapping("/sys/role")
@@ -41,8 +43,9 @@ public class SysRoleController {
 		SysRoleCriteria criteria = new SysRoleCriteria();
 		ParameterUtils.initDataTablesParams(request, criteria);
 
-		DataTablesResult<SysRole> result = sysRoleService.list(CurrentUser.sysUser(), criteria);
-		return JsonResponse.buildObject(result);
+		PagingResult<SysRole> result = sysRoleService.list(CurrentUser.sysUser(), criteria);
+		
+		return JsonResponse.buildObject(DataUtils.pagingResult2DataTablesResult(result));
 	}
 
 	@RequestMapping("/create")
