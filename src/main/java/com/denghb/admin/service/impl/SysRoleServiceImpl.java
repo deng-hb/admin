@@ -44,6 +44,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 	@Override
 	public PagingResult<SysRole> list(CurrentUser currentUser, SysRoleCriteria criteria) {
 		StringBuffer sql = new StringBuffer(DbHelperUtils.getSelectSql(SysRole.class));
+		sql.append(" where deleted = 0 ");
 		PagingResult<SysRole> result = db.list(sql , SysRole.class, criteria);
 		return result;
 	}
@@ -51,21 +52,33 @@ public class SysRoleServiceImpl implements SysRoleService {
 	@Override
 	public void delete(CurrentUser currentUser, int[] ids) throws AdminException {
 		for (int i = 0; i < ids.length; i++) {
+			int id = ids[i];
+			
+			// 判断是否有用户正在使用
+			String sql = "select count(*) from sys_user_role where role_id = ? and deleted = 0";
+			Integer count = db.queryForObject(sql, Integer.class, id);
+			if (null != count && 0 < count) {
+				throw AdminException.buildException(String.format("ID:%d 有用户正在使用", id));
+			}
+			
 			SysRole role = new SysRole();
-			role.setId(ids[i]);
+			role.setId(id);
 			role.setUpdatedBy(currentUser.getAccountId());
 			role.setDeleted(Deleted.TRUE);
 			boolean result = db.updateById(role);
 			if (!result) {
 				throw AdminException.buildDeleteException();
 			}
+			// 删除角色下对应的资源
+			sql = "update sys_role_resource set deleted = 1 where role_id = ?";
+			db.execute(sql, id);
 		}
 	}
 
 	@Override
 	public List<SysRole> listAll(CurrentUser currentUser) {
 		String sql = DbHelperUtils.getSelectSql(SysRole.class);
-		sql += " order by id desc";
+		sql += " where deleted = 0 order by id desc";
 		return db.list(sql, SysRole.class);
 	}
 

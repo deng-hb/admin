@@ -63,4 +63,11 @@ public interface AccountService {
 	 */
 	void openAccount(CurrentUser currentUser, long accountId) throws AdminException;
 
+	/**
+	 * 更新最后在线时间
+	 * 
+	 * @param currentUser
+	 * @param accountId
+	 */
+	void updateOnlineTime(CurrentUser currentUser, long accountId);
 }

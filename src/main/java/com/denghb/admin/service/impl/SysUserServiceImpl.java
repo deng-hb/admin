@@ -46,6 +46,7 @@ public class SysUserServiceImpl implements SysUserService {
 	public PagingResult<SysUser> list(CurrentUser currentUser, SysUserCriteria criteria) {
 		StringBuffer sql = new StringBuffer();
 		sql.append(DbHelperUtils.getSelectSql(SysUser.class));
+		sql.append("where deleted = 0");
 		PagingResult<SysUser> result = db.list(sql, SysUser.class, criteria);
 		return result;
 	}

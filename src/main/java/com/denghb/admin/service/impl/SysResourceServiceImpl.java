@@ -51,7 +51,7 @@ public class SysResourceServiceImpl implements SysResourceService {
 
 		StringBuffer sql = new StringBuffer();
 		sql.append(DbHelperUtils.getSelectSql(SysResource.class));
-
+		sql.append(" where deleted = 0 ");
 		PagingResult<SysResource> result = db.list(sql, SysResource.class, criteria);
 		return result;
 	}
@@ -60,7 +60,9 @@ public class SysResourceServiceImpl implements SysResourceService {
 	@Cacheable(value = "sysResource", keyGenerator = "emptyKeyGenerator")
 	@Override
 	public List<SysResource> listAll(CurrentUser currentUser) {
-		return db.list(DbHelperUtils.getSelectSql(SysResource.class), SysResource.class);
+		String sql = DbHelperUtils.getSelectSql(SysResource.class);
+		sql += " where deleted = 0 ";
+		return db.list(sql, SysResource.class);
 	}
 
 	// 清除缓存
@@ -74,8 +76,21 @@ public class SysResourceServiceImpl implements SysResourceService {
 		// TODO 重复删除
 		for (int i = 0; i < ids.length; i++) {
 
+			int id = ids[i];
+			String sql = "select count(*) from sys_resource where parent_id = ? and deleted = 0";
+			Integer count = db.queryForObject(sql, Integer.class, id);
+			if (null != count && 0 < count) {
+				throw AdminException.buildException(String.format("ID:%d 有子资源", id));
+			}
+			
+			sql = "select count(*) from sys_role_resource where resource_id = ? and deleted = 0";
+			count = db.queryForObject(sql, Integer.class, id);
+			if (null != count && 0 < count) {
+				throw AdminException.buildException(String.format("ID:%d 有角色正在使用", id));
+			}
+
 			SysResource res = new SysResource();
-			res.setId(ids[i]);
+			res.setId(id);
 			res.setUpdatedBy(currentUser.getAccountId());
 			res.setDeleted(Deleted.TRUE);
 			boolean result = db.updateById(res);

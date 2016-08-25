@@ -7,6 +7,7 @@ import com.denghb.admin.base.AdminException;
 import com.denghb.admin.base.CurrentUser;
 import com.denghb.admin.criteria.AccountCriteria;
 import com.denghb.admin.dao.DbDao;
+import com.denghb.admin.dao.IdGenerator;
 import com.denghb.admin.dao.PagingResult;
 import com.denghb.admin.domain.Account;
 import com.denghb.admin.domain.AccountPassword;
@@ -41,9 +42,12 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public CurrentUser signUp(String username, String password) throws AdminException {
+		long accountId = IdGenerator.accountId();
+		
 		Account account = new Account();
 		account.setUsername(username);
 		account.setCreatedBy(0L);
+		account.setId(accountId);
 
 		account.setSysFlag(0);// 系统用户
 		account.setUserFlag(0);//
@@ -53,7 +57,7 @@ public class AccountServiceImpl implements AccountService {
 		}
 
 		AccountPassword ap = new AccountPassword();
-		ap.setAccountId(account.getId());
+		ap.setAccountId(accountId);
 		ap.setPassword(password);
 		ap.setCreatedBy(0L);
 		result = db.insert(ap);
@@ -102,6 +106,11 @@ public class AccountServiceImpl implements AccountService {
 		if (!result) {
 			throw AdminException.buildUpdateException();
 		}
+	}
+
+	@Override
+	public void updateOnlineTime(CurrentUser currentUser, long accountId) {
+		db.execute("update account set last_online_time = now() where id = ?", accountId);
 	}
 
 }

@@ -6,6 +6,17 @@ import com.denghb.dbhelper.DbHelper;
 
 public class DbDao extends DbHelper {
 	
+	// TODO MySql 成功了获取自动生成的ID
+//			if (res && idAuto) {
+//				try {
+//					Integer id = queryForObject("select LAST_INSERT_ID() as id", Integer.class);
+//					idField.setAccessible(true);
+//					idField.set(object, id);
+//				} catch (Exception e) {
+//					log.warn("id only MySql ..." + e.getMessage(), e);
+//				}
+//			}
+	
 	public <T> PagingResult<T> list(StringBuffer sql, Class<T> clazz, Paging paging) {
 		PagingResult<T> result = new PagingResult<T>(paging);
 
@@ -74,4 +85,5 @@ public class DbDao extends DbHelper {
 
 		return result;
 	}
+	
 }

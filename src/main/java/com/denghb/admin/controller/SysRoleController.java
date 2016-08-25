@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.denghb.admin.base.AdminException;
 import com.denghb.admin.base.CurrentUser;
-import com.denghb.admin.base.DataTablesResult;
 import com.denghb.admin.base.JsonResponse;
 import com.denghb.admin.criteria.SysRoleCriteria;
 import com.denghb.admin.dao.PagingResult;
@@ -24,6 +25,7 @@ import com.denghb.admin.utils.WebUtils;
 @Controller
 @RequestMapping("/sys/role")
 public class SysRoleController {
+	private static final Logger log = LoggerFactory.getLogger(SysRoleController.class);
 
 	@Autowired
 	private SysRoleService sysRoleService;
@@ -44,7 +46,7 @@ public class SysRoleController {
 		ParameterUtils.initDataTablesParams(request, criteria);
 
 		PagingResult<SysRole> result = sysRoleService.list(CurrentUser.sysUser(), criteria);
-		
+
 		return JsonResponse.buildObject(DataUtils.pagingResult2DataTablesResult(result));
 	}
 
@@ -60,6 +62,7 @@ public class SysRoleController {
 		try {
 			sysRoleService.create(CurrentUser.sysUser(), res);
 		} catch (AdminException e) {
+			log.error(e.getMessage(), e);
 			return JsonResponse.buildFailure("操作失败");
 		}
 
@@ -80,12 +83,13 @@ public class SysRoleController {
 		try {
 			sysRoleService.update(CurrentUser.sysUser(), res);
 		} catch (AdminException e) {
+			log.error(e.getMessage(), e);
 			return JsonResponse.buildFailure("操作失败");
 		}
 
 		return JsonResponse.buildSuccess("操作成功");
 	}
-	
+
 	@RequestMapping("/delete")
 	@ResponseBody
 	public JsonResponse delete(HttpServletRequest request) {
@@ -98,12 +102,13 @@ public class SysRoleController {
 		try {
 			sysRoleService.delete(WebUtils.getCurrentUser(request), ids);
 		} catch (AdminException e) {
+			log.error(e.getMessage(), e);
 			return JsonResponse.buildFailure("操作失败");
 		}
 
 		return JsonResponse.buildSuccess("操作成功");
 	}
-	
+
 	// 全部
 	@RequestMapping("/list-all")
 	@ResponseBody

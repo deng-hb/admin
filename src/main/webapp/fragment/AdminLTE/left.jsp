@@ -19,24 +19,26 @@
 						<c:choose>
 							<%-- 是链接 --%>
 							<c:when test="${isLink}">
-								<li><a href="${isLink?res.url:'#' }" ><i class="fa fa-${res.icon }"></i> <span>${res.name}</span></a></li>
+								<li><a href="${isLink?res.url:'#' }"><i class="fa fa-${res.icon }"></i> <span>${res.name}</span></a></li>
 							</c:when>
-							<%-- 是分类 --%>
+							<%-- 是分组 --%>
 							<c:otherwise>
 								${isParentStart?'':'</ul>' }<%-- 结束之前的子链接 --%>
 		            			<c:set var="isParentStart" value="false"></c:set>
 								<li class="treeview">
-								<a href="${isLink?res.url:'#' }" ><i class="fa fa-link"></i> <span>${res.name}</span> <i class="fa fa-angle-left pull-right"></i></a>
+								<a href="${isLink?res.url:'#' }"  res-id="${res.id}" ><i class="fa fa-link"></i> <span>${res.name}</span> <i class="fa fa-angle-left pull-right"></i></a>
 								<ul class="treeview-menu">
 							</c:otherwise>
 						</c:choose>
 					</c:when>
 					<c:otherwise>
 						</li>
-						<li><a href="${isLink?res.url:'#' }" class="${isLink?'animsition-link':'' }"><i class="fa fa-link"></i> <span>${res.name}</span></a></li>
+						<li><a href="${isLink?res.url:'#' }"  ${uri eq res.url?'style="color:#fff"':'' } class="${isLink?'animsition-link':'' }"><i class="fa fa-link"></i> <span>${res.name}</span></a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
         </section>
         <!-- /.sidebar -->
       </aside>
+      
+      

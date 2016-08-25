@@ -84,6 +84,8 @@ public class AuthFilter implements Filter {
 
 		// TODO 当前ContentPath
 		request.setAttribute("ctx", ctx);
+
+		request.setAttribute("uri", uri);
 		
 		// 初始化系统资源
 		initSysResources();
@@ -161,6 +163,9 @@ public class AuthFilter implements Filter {
 			}
 			// TODO 当前访问页面的名称
 			request.setAttribute("page_name", resource.getName());
+			
+			// 最后在线时间
+			accountService.updateOnlineTime(currentUser, currentUser.getAccountId());
 
 		}
 

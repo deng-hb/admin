@@ -5,13 +5,14 @@
 
     <!-- jQuery 2.1.4 -->
     <script src="/assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="/assets/js/jquery.cookie.js"></script>
 	<!-- animsition.js -->
 	<script src="/assets/plugins/animsition/js/animsition.min.js"></script>
 	<script type="text/javascript" src="/assets/js/app.js"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="/assets/AdminLTE/js/app.min.js"></script>
+    <script src="/assets/AdminLTE/js/app.js"></script>
 	<c:if test="${-1 < fn:indexOf(param.js, 'iCheck')}">
     <script src="/assets/plugins/iCheck/icheck.min.js"></script>
 	</c:if>
@@ -43,6 +44,46 @@
     <script src="/assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->
     <script src="/assets/plugins/fastclick/fastclick.min.js"></script>
+    <script>
     
+    	// 记住上次点击的菜单
+      	$(function(){
+      		$('.treeview,a').click(function(){
+      			var $this = $(this);
+      			var id = $this.attr('res-id');
+      			if(id){
+          			console.log(id);
+      				$.cookie('menu-open-id',id,{ expires: 7 ,path:"/"});
+      			}
+      			
+      		});
+      		
+      		var animationSpeed = $.AdminLTE.options.animationSpeed;
+      		var id = $.cookie('menu-open-id');
+      		var $this = $('[res-id="'+id+'"]');
+            var checkElement = $this.next();
+
+            //Get the parent menu
+            var parent = $this.parents('ul').first();
+            //Close all open menus within the parent
+            var ul = parent.find('ul:visible').slideUp(animationSpeed);
+            //Remove the menu-open class from the parent
+            ul.removeClass('menu-open');
+            //Get the parent li
+            var parent_li = $this.parent("li");
+
+            //Open the target menu and add the menu-open class
+            checkElement.slideDown(animationSpeed, function () {
+              //Add the class active to the parent li
+              checkElement.addClass('menu-open');
+              parent.find('li.active').removeClass('active');
+              parent_li.addClass('active');
+              //Fix the layout in case the sidebar stretches over the height of the window
+              $.AdminLTE.layout.fix();
+            });
+      	});
+      
+      </script>
+      
     
     

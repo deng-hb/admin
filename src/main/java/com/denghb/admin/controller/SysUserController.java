@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.denghb.admin.base.AdminException;
 import com.denghb.admin.base.CurrentUser;
-import com.denghb.admin.base.DataTablesResult;
 import com.denghb.admin.base.JsonResponse;
 import com.denghb.admin.base.ParameterException;
 import com.denghb.admin.criteria.SysUserCriteria;
 import com.denghb.admin.dao.PagingResult;
-import com.denghb.admin.domain.SysRole;
 import com.denghb.admin.domain.SysUser;
 import com.denghb.admin.service.SysUserService;
 import com.denghb.admin.utils.DataUtils;
@@ -113,8 +111,10 @@ public class SysUserController {
 			sysUserService.delete(WebUtils.getCurrentUser(request), ids);
 			return JsonResponse.buildSuccess("操作成功");
 		} catch (AdminException e) {
+			log.error(e.getMessage(), e);
 			return JsonResponse.buildFailure(e.getMessage());
 		} catch (ParameterException e) {
+			log.error(e.getMessage(), e);
 			return JsonResponse.buildFailure(e.getMessage());
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
