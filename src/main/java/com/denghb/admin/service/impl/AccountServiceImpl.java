@@ -79,7 +79,7 @@ public class AccountServiceImpl implements AccountService {
 
 		StringBuffer sql = new StringBuffer();
 		sql.append(DbHelperUtils.getSelectSql(Account.class));
-
+		sql.append(" where deleted = 0");
 		PagingResult<Account> result = db.list(sql, Account.class, criteria);
 		return result;
 	}
