@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import org.apache.taglibs.standard.tag.common.core.Util;
 
 /**
- * 
+ * 防止xss攻击
  * @author denghb
  *
  */

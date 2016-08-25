@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.denghb.admin.base.AdminException;
-import com.denghb.admin.base.DataTablesResult;
 import com.denghb.admin.base.JsonResponse;
 import com.denghb.admin.criteria.SysResourceCriteria;
 import com.denghb.admin.domain.SysResource;

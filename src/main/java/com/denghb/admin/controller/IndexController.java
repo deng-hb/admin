@@ -140,6 +140,7 @@ public class IndexController {
 				// 强制踢出
 
 			} else {
+				// 已经登录了
 				return JsonResponse.build2("/home/");
 			}
 		}
