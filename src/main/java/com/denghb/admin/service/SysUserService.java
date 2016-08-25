@@ -3,8 +3,8 @@ package com.denghb.admin.service;
 import com.denghb.admin.base.AdminException;
 import com.denghb.admin.base.CurrentUser;
 import com.denghb.admin.criteria.SysUserCriteria;
+import com.denghb.admin.dao.PagingResult;
 import com.denghb.admin.domain.SysUser;
-import com.denghb.dbhelper.domain.PagingResult;
 
 public interface SysUserService {
 

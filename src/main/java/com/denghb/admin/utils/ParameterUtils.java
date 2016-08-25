@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.denghb.admin.base.ParameterException;
-import com.denghb.dbhelper.domain.Paging;
+import com.denghb.admin.dao.Paging;
 
 /**
  * 参数处理工具

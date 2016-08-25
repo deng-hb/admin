@@ -14,12 +14,12 @@ import com.denghb.admin.base.CurrentUser;
 import com.denghb.admin.base.DataTablesResult;
 import com.denghb.admin.base.JsonResponse;
 import com.denghb.admin.criteria.SysRoleCriteria;
+import com.denghb.admin.dao.PagingResult;
 import com.denghb.admin.domain.SysRole;
 import com.denghb.admin.service.SysRoleService;
 import com.denghb.admin.utils.DataUtils;
 import com.denghb.admin.utils.ParameterUtils;
 import com.denghb.admin.utils.WebUtils;
-import com.denghb.dbhelper.domain.PagingResult;
 
 @Controller
 @RequestMapping("/sys/role")

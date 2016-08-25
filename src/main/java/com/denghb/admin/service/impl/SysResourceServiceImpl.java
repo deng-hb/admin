@@ -11,17 +11,17 @@ import com.denghb.admin.base.AdminException;
 import com.denghb.admin.base.Consts.Deleted;
 import com.denghb.admin.base.CurrentUser;
 import com.denghb.admin.criteria.SysResourceCriteria;
+import com.denghb.admin.dao.DbDao;
+import com.denghb.admin.dao.PagingResult;
 import com.denghb.admin.domain.SysResource;
 import com.denghb.admin.service.SysResourceService;
-import com.denghb.dbhelper.DbHelper;
-import com.denghb.dbhelper.domain.PagingResult;
-import com.denghb.dbhelper.utils.DbHelperUtils;
+import com.denghb.dbhelper.DbHelperUtils;
 
 @Service
 public class SysResourceServiceImpl implements SysResourceService {
 
 	@Autowired
-	private DbHelper db;
+	private DbDao db;
 
 	// 清除缓存
 	@CacheEvict(value = "sysResource", keyGenerator = "emptyKeyGenerator")

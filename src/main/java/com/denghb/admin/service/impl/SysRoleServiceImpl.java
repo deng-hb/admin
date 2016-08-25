@@ -1,6 +1,5 @@
 package com.denghb.admin.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,19 +8,18 @@ import org.springframework.stereotype.Service;
 import com.denghb.admin.base.AdminException;
 import com.denghb.admin.base.Consts.Deleted;
 import com.denghb.admin.base.CurrentUser;
-import com.denghb.admin.base.DataTablesResult;
 import com.denghb.admin.criteria.SysRoleCriteria;
+import com.denghb.admin.dao.DbDao;
+import com.denghb.admin.dao.PagingResult;
 import com.denghb.admin.domain.SysRole;
 import com.denghb.admin.service.SysRoleService;
-import com.denghb.dbhelper.DbHelper;
-import com.denghb.dbhelper.domain.PagingResult;
-import com.denghb.dbhelper.utils.DbHelperUtils;
+import com.denghb.dbhelper.DbHelperUtils;
 
 @Service
 public class SysRoleServiceImpl implements SysRoleService {
 
 	@Autowired
-	private DbHelper db;
+	private DbDao db;
 
 	@Override
 	public void create(CurrentUser currentUser, SysRole role) throws AdminException {

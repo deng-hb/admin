@@ -5,8 +5,8 @@ import java.util.List;
 import com.denghb.admin.base.AdminException;
 import com.denghb.admin.base.CurrentUser;
 import com.denghb.admin.criteria.SysRoleCriteria;
+import com.denghb.admin.dao.PagingResult;
 import com.denghb.admin.domain.SysRole;
-import com.denghb.dbhelper.domain.PagingResult;
 
 public interface SysRoleService {
 

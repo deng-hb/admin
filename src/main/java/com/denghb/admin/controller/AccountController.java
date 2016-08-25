@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.denghb.admin.base.DataTablesResult;
 import com.denghb.admin.base.JsonResponse;
 import com.denghb.admin.criteria.AccountCriteria;
+import com.denghb.admin.dao.PagingResult;
 import com.denghb.admin.domain.Account;
 import com.denghb.admin.service.AccountAccessService;
 import com.denghb.admin.service.AccountService;
 import com.denghb.admin.utils.DataUtils;
 import com.denghb.admin.utils.ParameterUtils;
 import com.denghb.admin.utils.WebUtils;
-import com.denghb.dbhelper.domain.PagingResult;
 
 @Controller
 @RequestMapping("/account")

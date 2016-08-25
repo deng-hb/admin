@@ -6,18 +6,18 @@ import org.springframework.stereotype.Service;
 import com.denghb.admin.base.AdminException;
 import com.denghb.admin.base.CurrentUser;
 import com.denghb.admin.criteria.AccountCriteria;
+import com.denghb.admin.dao.DbDao;
+import com.denghb.admin.dao.PagingResult;
 import com.denghb.admin.domain.Account;
 import com.denghb.admin.domain.AccountPassword;
 import com.denghb.admin.service.AccountService;
-import com.denghb.dbhelper.DbHelper;
-import com.denghb.dbhelper.domain.PagingResult;
-import com.denghb.dbhelper.utils.DbHelperUtils;
+import com.denghb.dbhelper.DbHelperUtils;
 
 @Service
 public class AccountServiceImpl implements AccountService {
 
 	@Autowired
-	private DbHelper db;
+	private DbDao db;
 
 	@Override
 	public CurrentUser signIn(String username, String password) throws AdminException {

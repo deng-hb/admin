@@ -13,7 +13,7 @@ import com.denghb.admin.base.CurrentUser;
 import com.denghb.admin.domain.AccountAccess;
 import com.denghb.admin.service.AccountAccessService;
 import com.denghb.dbhelper.DbHelper;
-import com.denghb.dbhelper.utils.DbHelperUtils;
+import com.denghb.dbhelper.DbHelperUtils;
 
 @Service
 public class AccountAccessServiceImpl implements AccountAccessService {

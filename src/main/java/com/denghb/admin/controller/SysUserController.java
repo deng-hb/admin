@@ -17,6 +17,7 @@ import com.denghb.admin.base.DataTablesResult;
 import com.denghb.admin.base.JsonResponse;
 import com.denghb.admin.base.ParameterException;
 import com.denghb.admin.criteria.SysUserCriteria;
+import com.denghb.admin.dao.PagingResult;
 import com.denghb.admin.domain.SysRole;
 import com.denghb.admin.domain.SysUser;
 import com.denghb.admin.service.SysUserService;
@@ -24,7 +25,6 @@ import com.denghb.admin.utils.DataUtils;
 import com.denghb.admin.utils.DateUtils;
 import com.denghb.admin.utils.ParameterUtils;
 import com.denghb.admin.utils.WebUtils;
-import com.denghb.dbhelper.domain.PagingResult;
 
 @Controller
 @RequestMapping("/sys/user")

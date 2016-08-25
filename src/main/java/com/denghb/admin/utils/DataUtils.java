@@ -1,7 +1,7 @@
 package com.denghb.admin.utils;
 
 import com.denghb.admin.base.DataTablesResult;
-import com.denghb.dbhelper.domain.PagingResult;
+import com.denghb.admin.dao.PagingResult;
 
 public class DataUtils {
 

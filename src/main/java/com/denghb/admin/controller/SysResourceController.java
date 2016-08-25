@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.denghb.admin.base.AdminException;
 import com.denghb.admin.base.JsonResponse;
 import com.denghb.admin.criteria.SysResourceCriteria;
+import com.denghb.admin.dao.PagingResult;
 import com.denghb.admin.domain.SysResource;
 import com.denghb.admin.service.SysResourceService;
 import com.denghb.admin.utils.DataUtils;
 import com.denghb.admin.utils.ParameterUtils;
 import com.denghb.admin.utils.WebUtils;
-import com.denghb.dbhelper.domain.PagingResult;
 
 @Controller
 @RequestMapping("/sys/resource")

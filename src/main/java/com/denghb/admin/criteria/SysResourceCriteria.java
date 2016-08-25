@@ -1,6 +1,6 @@
 package com.denghb.admin.criteria;
 
-import com.denghb.dbhelper.domain.Paging;
+import com.denghb.admin.dao.Paging;
 
 public class SysResourceCriteria extends Paging {
 

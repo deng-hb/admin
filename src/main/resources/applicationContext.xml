@@ -40,7 +40,7 @@
 		</property>
 	</bean>
 
-	<bean id="dbHepler" class="com.denghb.dbhelper.impl.DbHelperImpl">
+	<bean id="dbdao" class="com.denghb.admin.dao.DbDao">
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>		
 	</bean>
 	

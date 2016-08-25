@@ -12,13 +12,13 @@ import com.denghb.admin.base.AdminException;
 import com.denghb.admin.base.Consts.Deleted;
 import com.denghb.admin.base.CurrentUser;
 import com.denghb.admin.criteria.SysUserCriteria;
+import com.denghb.admin.dao.DbDao;
+import com.denghb.admin.dao.PagingResult;
 import com.denghb.admin.domain.SysUser;
 import com.denghb.admin.service.AccountService;
 import com.denghb.admin.service.SysUserService;
 import com.denghb.admin.utils.Md5Utils;
-import com.denghb.dbhelper.DbHelper;
-import com.denghb.dbhelper.domain.PagingResult;
-import com.denghb.dbhelper.utils.DbHelperUtils;
+import com.denghb.dbhelper.DbHelperUtils;
 
 @Service
 public class SysUserServiceImpl implements SysUserService {
@@ -29,7 +29,7 @@ public class SysUserServiceImpl implements SysUserService {
 	private AccountService accountService;
 
 	@Autowired
-	private DbHelper db;
+	private DbDao db;
 
 	@Override
 	public void update(CurrentUser currentUser, SysUser user) throws AdminException {
